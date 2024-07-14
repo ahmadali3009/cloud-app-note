@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-let privatekey = "shhhhitsfortoken"
+let privatekey =  process.env.JWT_SECRET || "shhhhitsfortoken"
 
 let fetchuser = (req , res , next)=>
 {

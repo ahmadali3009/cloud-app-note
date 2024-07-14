@@ -1,15 +1,16 @@
 const express = require('express')
+require('dotenv').config();
 const cors = require('cors');
 const mongoose = require('mongoose')
 let connect = require('./connection')
 let router = require('./routes/user')
 let notesrouter = require("./routes/notes")
 const app = express()
-const port = 5000
-const username = 'ahmedalee3009';
-const password = encodeURIComponent('EX93hwa1KzS2QfJs'); // Use encodeURIComponent to automatically URL encode the password
-const cluster = 'ahmedcluster.rdukguv.mongodb.net';
-const dbname = 'cloudnotes'; // Replace with your database name
+const port = 5000 || process.env.PORT
+const username = process.env.MONGODB_USERNAME ||'ahmedalee3009';
+const password = process.env.MONGODB_PASSWORD ||encodeURIComponent('EX93hwa1KzS2QfJs'); // Use encodeURIComponent to automatically URL encode the password
+const cluster =  process.env.MONGODB_CLUSTER ||'ahmedcluster.rdukguv.mongodb.net';
+const dbname =   process.env.MONGODB_DBNAME ||'cloudnotes'; // Replace with your database name
 
 app.use(express.json())
 app.use(cors());
