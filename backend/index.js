@@ -1,30 +1,36 @@
-const express = require('express')
+const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
-const mongoose = require('mongoose')
-let connect = require('./connection')
-let router = require('./routes/user')
-let notesrouter = require("./routes/notes")
-const app = express()
-const port = 5000 || process.env.PORT
-const username = process.env.MONGODB_USERNAME ||'ahmedalee3009';
-const password = process.env.MONGODB_PASSWORD ||encodeURIComponent('EX93hwa1KzS2QfJs'); // Use encodeURIComponent to automatically URL encode the password
-const cluster =  process.env.MONGODB_CLUSTER ||'ahmedcluster.rdukguv.mongodb.net';
-const dbname =   process.env.MONGODB_DBNAME ||'cloudnotes'; // Replace with your database name
+const mongoose = require('mongoose');
+const connect = require('./connection');
+const router = require('./routes/user');
+const notesRouter = require('./routes/notes');
 
-app.use(express.json())
+const app = express();
+const port = process.env.PORT || 5000;
+const username = process.env.MONGODB_USERNAME || 'ahmedalee3009';
+const password = encodeURIComponent(process.env.MONGODB_PASSWORD || 'EX93hwa1KzS2QfJs');
+const cluster = process.env.MONGODB_CLUSTER || 'ahmedcluster.rdukguv.mongodb.net';
+const dbname = process.env.MONGODB_DBNAME || 'cloudnotes';
+
+app.use(express.json());
 app.use(cors());
 
-connect(`mongodb+srv://${username}:${password}@${cluster}/${dbname}?retryWrites=true&w=majority
-`).then(()=>{console.log("connection is connected")}).catch((error)=>{console.log(error)})
+connect(`mongodb+srv://${username}:${password}@${cluster}/${dbname}?retryWrites=true&w=majority`)
+  .then(() => {
+    console.log('MongoDB connected');
+  })
+  .catch((error) => {
+    console.error('MongoDB connection error:', error.message);
+  });
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-app.use('/' , router)
-app.use('/' , notesrouter)
+  res.send('Hello World!');
+});
 
+app.use('/', router);
+app.use('/', notesRouter);
 
 app.listen(port, () => {
-  console.log(`MY cloudnotes listening on port ${port}`)
-})
+  console.log(`MY cloudnotes listening on port ${port}`);
+});
