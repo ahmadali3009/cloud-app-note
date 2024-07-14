@@ -8,15 +8,17 @@ const notesRouter = require('./routes/notes');
 
 const app = express();
 const port = process.env.PORT || 5000;
-const username = process.env.MONGODB_USERNAME || 'ahmedalee3009';
-const password = encodeURIComponent(process.env.MONGODB_PASSWORD || 'EX93hwa1KzS2QfJs');
-const cluster = process.env.MONGODB_CLUSTER || 'ahmedcluster.rdukguv.mongodb.net';
-const dbname = process.env.MONGODB_DBNAME || 'cloudnotes';
+const username = process.env.MONGODB_USERNAME;
+const password = encodeURIComponent(process.env.MONGODB_PASSWORD);
+const cluster = process.env.MONGODB_CLUSTER;
+const dbname = process.env.MONGODB_DBNAME;
 
 app.use(express.json());
 app.use(cors());
 
-connect(`mongodb+srv://${username}:${password}@${cluster}/${dbname}?retryWrites=true&w=majority`)
+const mongoURI = `mongodb+srv://${username}:${password}@${cluster}/${dbname}?retryWrites=true&w=majority`;
+
+connect(mongoURI)
   .then(() => {
     console.log('MongoDB connected');
   })
