@@ -9,7 +9,7 @@ const notesRouter = require('./routes/notes');
 const app = express();
 const port = process.env.PORT || 5000;
 const username = process.env.MONGODB_USERNAME;
-const password = encodeURIComponent(process.env.MONGODB_PASSWORD);
+const password = process.env.MONGODB_PASSWORD;
 const cluster = process.env.MONGODB_CLUSTER;
 const dbname = process.env.MONGODB_DBNAME;
 
