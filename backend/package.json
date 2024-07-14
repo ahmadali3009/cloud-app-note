@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "build": "babel src -d dist"
+
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +19,13 @@
     "mongoose": "^8.2.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.24.8",
+    "@babel/preset-env": "^7.24.8",
     "nodemon": "^3.1.0"
+  },
+  "babel": {
+    "presets": ["@babel/preset-env"]
   },
   "description": ""
 }
