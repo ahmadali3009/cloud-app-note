@@ -26,7 +26,7 @@ app.use(cors({
   // Allow requests only from this origin
 }));
 
-const mongoURI = `mongodb+srv://${username}:${password}@${cluster}/${dbname}?retryWrites=true&w=majority`;
+const mongoURI = process.env.MONGO_URL;
 
 mongoose.connect(mongoURI, {
 })
