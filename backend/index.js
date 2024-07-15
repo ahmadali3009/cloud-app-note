@@ -15,7 +15,6 @@ const dbname = process.env.MONGODB_DBNAME || 'cloudnotes';
 
 
 app.use(express.json());
-app.use(cors());
 app.use(cors({
   origin: 'https://cloud-note-frontend.onrender.com', // Allow requests only from this origin
 }));
