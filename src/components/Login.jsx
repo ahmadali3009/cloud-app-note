@@ -1,46 +1,58 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+
 const Login = () => {
+    // const host = "http://localhost:5000";
     const host = "https://cloud-notes-glns.onrender.com";
-    const [credentials , setcredentials] = useState({email:"" ,password:""})
-    const onChange = (e) => {
-        setcredentials({ ...credentials, [e.target.name]: e.target.value })
-    }
+    const [credentials, setCredentials] = useState({ email: "", password: "" });
     const navigate = useNavigate();
-    const submithandler = async(e)=>
-        {
-            e.preventDefault()
+
+    const onChange = (e) => {
+        setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    };
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        try {
             const response = await fetch(`${host}/login`, {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                method: "POST",
                 headers: {
-                  "Content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify({email: credentials.email , password: credentials.password}), // body data type must match "Content-Type" header
-              });
-              const json = await response.json();    
-            //    console.log(json)
-               if(json.result){
-                localStorage.setItem("token" , json["auth-token"])
-                console.log(localStorage.getItem("token"))
+                body: JSON.stringify({ email: credentials.email, password: credentials.password }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const json = await response.json();
+            if (json.result) {
+                localStorage.setItem("token", json["auth-token"]);
+                console.log(localStorage.getItem("token"));
                 navigate("/", { state: { key: "value" } });
+            } else {
+                alert("Invalid credentials");
             }
-            else{
-                alert("there is no token")
-            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("There was an error logging in. Please try again.");
         }
+    };
+
     return (
         <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
-            <form onSubmit={submithandler} className="space-y-4">
+            <form onSubmit={submitHandler} className="space-y-4">
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
                     <input
                         type="email"
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         id="email"
+                        name="email"
                         value={credentials.email}
                         onChange={onChange}
                         autoComplete="current-email"
-                        name="email"
                         aria-describedby="emailHelp"
                     />
                 </div>
@@ -65,6 +77,6 @@ const Login = () => {
             </form>
         </div>
     );
-}
+};
 
-export default Login
+export default Login;

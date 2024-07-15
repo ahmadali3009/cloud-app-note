@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import NoteContext from "./notecontext";
 import { json } from "react-router-dom";
 let NoteState = (props)=>
-{const host = "https://cloud-notes-glns.onrender.com";
+{
+    const host = "https://cloud-notes-glns.onrender.com";
+    // const host = "http://localhost:5000";
+
 const initialnotes = [];
 let [notes , setnotes] = useState(initialnotes)
 

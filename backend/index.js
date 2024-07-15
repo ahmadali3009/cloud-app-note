@@ -12,14 +12,20 @@ const username = process.env.MONGODB_USERNAME || 'ahmedalee3009';
 const password = process.env.MONGODB_PASSWORD || 'EX93hwa1KzS2QfJs';
 const cluster = process.env.MONGODB_CLUSTER || 'ahmedcluster.rdukguv.mongodb.net';
 const dbname = process.env.MONGODB_DBNAME || 'cloudnotes';
+console.log("username" , username)
+console.log("password" , password)
+console.log("cluster" , cluster)
+console.log("dbname" , dbname)
 
 
 app.use(express.json());
 app.use(cors({
-  origin: 'https://cloud-note-frontend.onrender.com', 
+  // origin: 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL || 'https://cloud-note-frontend.onrender.com',
   credentials: true,
   // Allow requests only from this origin
 }));
+
 const mongoURI = `mongodb+srv://${username}:${password}@${cluster}/${dbname}?retryWrites=true&w=majority`;
 
 mongoose.connect(mongoURI, {
