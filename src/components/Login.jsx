@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 const Login = () => {
-    const host = "http://localhost:5000";
+    const host = "https://cloud-notes-glns.onrender.com";
     const [credentials , setcredentials] = useState({email:"" ,password:""})
     const onChange = (e) => {
         setcredentials({ ...credentials, [e.target.name]: e.target.value })
