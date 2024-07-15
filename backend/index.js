@@ -7,7 +7,7 @@ const router = require('./routes/user');
 const notesRouter = require('./routes/notes');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const Port = process.env.PORT || 5000;
 const username = process.env.MONGODB_USERNAME || 'ahmedalee3009';
 const password = process.env.MONGODB_PASSWORD || 'EX93hwa1KzS2QfJs';
 const cluster = process.env.MONGODB_CLUSTER || 'ahmedcluster.rdukguv.mongodb.net';
@@ -44,6 +44,6 @@ app.get('/', (req, res) => {
 app.use('/', router);
 app.use('/', notesRouter);
 
-app.listen(port, () => {
-  console.log(`MY cloudnotes listening on port ${port}`);
+app.listen(Port, () => {
+  console.log(`MY cloudnotes listening on port ${Port}`);
 });
