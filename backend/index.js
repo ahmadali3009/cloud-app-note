@@ -8,23 +8,25 @@ const notesRouter = require('./routes/notes');
 
 const app = express();
 const port = process.env.PORT || 5000;
-const username = process.env.MONGODB_USERNAME;
-const password = process.env.MONGODB_PASSWORD;
-const cluster = process.env.MONGODB_CLUSTER;
-const dbname = process.env.MONGODB_DBNAME;
+const username = process.env.MONGODB_USERNAME || 'ahmedalee3009';
+const password = encodeURIComponent(process.env.MONGODB_PASSWORD || 'EX93hwa1KzS2QfJs');
+const cluster = process.env.MONGODB_CLUSTER || 'ahmedcluster.rdukguv.mongodb.net';
+const dbname = process.env.MONGODB_DBNAME || 'cloudnotes';
+
 
 app.use(express.json());
 app.use(cors());
 
-const mongoURI = `mongodb+srv://${process.env.MONGODB_USERNAME}:${encodeURIComponent(process.env.MONGODB_PASSWORD)}@${process.env.MONGODB_CLUSTER}/${process.env.MONGODB_DBNAME}?retryWrites=true&w=majority`;
+const mongoURI = `mongodb+srv://${username}:${password}@${cluster}/${dbname}?retryWrites=true&w=majority`;
 
-connect(mongoURI)
-  .then(() => {
-    console.log('MongoDB connected');
-  })
-  .catch((error) => {
-    console.error('MongoDB connection error:', error.message);
-  });
+mongoose.connect(mongoURI, {
+})
+.then(() => {
+  console.log('MongoDB connected');
+})
+.catch((error) => {
+  console.error('MongoDB connection error:', error.message);
+});
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
