@@ -26,7 +26,7 @@ app.use(cors({
   // Allow requests only from this origin
 }));
 
-const mongoURI = process.env.MONGO_URL;
+const mongoURI = process.env.mongoURI;
 
 mongoose.connect(mongoURI, {
 })
