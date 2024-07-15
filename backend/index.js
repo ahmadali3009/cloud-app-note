@@ -20,8 +20,8 @@ console.log("dbname" , dbname)
 
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173',
-  // origin: process.env.FRONTEND_URL || 'https://cloud-note-frontend.onrender.com',
+  // origin: 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL || 'https://cloud-note-frontend.onrender.com',
   credentials: true,
   // Allow requests only from this origin
 }));
