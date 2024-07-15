@@ -16,7 +16,7 @@ const dbname = process.env.MONGODB_DBNAME;
 app.use(express.json());
 app.use(cors());
 
-const mongoURI = `mongodb+srv://${username}:${password}@${cluster}/${dbname}?retryWrites=true&w=majority`;
+const mongoURI = `mongodb+srv://${process.env.MONGODB_USERNAME}:${encodeURIComponent(process.env.MONGODB_PASSWORD)}@${process.env.MONGODB_CLUSTER}/${process.env.MONGODB_DBNAME}?retryWrites=true&w=majority`;
 
 connect(mongoURI)
   .then(() => {
