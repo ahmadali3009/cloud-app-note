@@ -1,19 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
-import NoteState from './context/notestatecontext'
-
-import App from './App.jsx'
-import './index.css'
-import Home from './components/home'
-import About from './components/About'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import NoteState from './context/notestatecontext';
+import App from './App.jsx';
+import './index.css';
+import Home from './components/home';
+import About from './components/About';
 import Login from './components/Login.jsx';
 import Signup from './components/signup.jsx';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,21 +16,22 @@ const router = createBrowserRouter([
   },
   {
     path: "/about",
-    element:  <><App/><About /></>
+    element: <><App /><About /></>
   },
   {
     path: "/login",
-    element:  <><App/><Login /></>
+    element: <><App /><Login /></>
   },
   {
     path: "/signup",
-    element:  <><App/><Signup /></>
+    element: <><App /><Signup /></>
   },
 ]);
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
   <NoteState>
     <RouterProvider router={router} />
-  </NoteState>,
-  document.getElementById('root')
+  </NoteState>
 );
